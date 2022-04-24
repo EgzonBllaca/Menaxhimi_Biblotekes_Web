@@ -1,0 +1,98 @@
+﻿@model Menaxhimi_Biblotekes_Web.Models.AutoriLibri
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Libri</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Libri.KategoriaId" class="control-label"></label>
+                <input asp-for="Libri.KategoriaId" class="form-control" />
+                <span asp-validation-for="Libri.KategoriaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.Titulli" class="control-label"></label>
+                <input asp-for="Libri.Titulli" class="form-control" />
+                <span asp-validation-for="Libri.Titulli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.Image" class="control-label"></label>
+                <input asp-for="Libri.Image" class="form-control" />
+                <span asp-validation-for="Libri.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.Pershkrimi" class="control-label"></label>
+                <input asp-for="Libri.Pershkrimi" class="form-control" />
+                <span asp-validation-for="Libri.Pershkrimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.ISBN" class="control-label"></label>
+                <input asp-for="Libri.ISBN" class="form-control" />
+                <span asp-validation-for="Libri.ISBN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.ShtepiaBotuese" class="control-label"></label>
+                <input asp-for="Libri.ShtepiaBotuese" class="form-control" />
+                <span asp-validation-for="Libri.ShtepiaBotuese" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.VitiBotimit" class="control-label"></label>
+                <input asp-for="Libri.VitiBotimit" class="form-control" />
+                <span asp-validation-for="Libri.VitiBotimit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.NrKopjeve" class="control-label"></label>
+                <input asp-for="Libri.NrKopjeve" class="form-control" />
+                <span asp-validation-for="Libri.NrKopjeve" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Libri.IsDeleted" /> @Html.DisplayNameFor(model => model.Libri.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Libri.IsActive" /> @Html.DisplayNameFor(model => model.Libri.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.CreatedByUserID" class="control-label"></label>
+                <input asp-for="Libri.CreatedByUserID" class="form-control" />
+                <span asp-validation-for="Libri.CreatedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.CreatedOn" class="control-label"></label>
+                <input asp-for="Libri.CreatedOn" class="form-control" />
+                <span asp-validation-for="Libri.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.LastUpdatedByUserID" class="control-label"></label>
+                <input asp-for="Libri.LastUpdatedByUserID" class="form-control" />
+                <span asp-validation-for="Libri.LastUpdatedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Libri.LastUpdatedOn" class="control-label"></label>
+                <input asp-for="Libri.LastUpdatedOn" class="form-control" />
+                <span asp-validation-for="Libri.LastUpdatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

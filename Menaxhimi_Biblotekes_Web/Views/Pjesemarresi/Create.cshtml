@@ -1,0 +1,88 @@
+﻿@model Menaxhimi_Biblotekes.Models.Pjesemarresi
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pjesemarresi</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoliId" class="control-label"></label>
+                <input asp-for="RoliId" class="form-control" />
+                <span asp-validation-for="RoliId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Emri" class="control-label"></label>
+                <input asp-for="Emri" class="form-control" />
+                <span asp-validation-for="Emri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mbiemri" class="control-label"></label>
+                <input asp-for="Mbiemri" class="form-control" />
+                <span asp-validation-for="Mbiemri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Perdoruesi" class="control-label"></label>
+                <input asp-for="Perdoruesi" class="form-control" />
+                <span asp-validation-for="Perdoruesi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fjalekalimi" class="control-label"></label>
+                <input asp-for="Fjalekalimi" class="form-control" />
+                <span asp-validation-for="Fjalekalimi" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedByUserID" class="control-label"></label>
+                <input asp-for="CreatedByUserID" class="form-control" />
+                <span asp-validation-for="CreatedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdatedByUserID" class="control-label"></label>
+                <input asp-for="LastUpdatedByUserID" class="form-control" />
+                <span asp-validation-for="LastUpdatedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdatedOn" class="control-label"></label>
+                <input asp-for="LastUpdatedOn" class="form-control" />
+                <span asp-validation-for="LastUpdatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
