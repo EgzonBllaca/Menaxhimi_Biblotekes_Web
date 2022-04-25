@@ -25,31 +25,12 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(await biblotekaDbContext.ToListAsync());
         }
 
-        // GET: AutoriLibri/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var autoriLibri = await _context.AutoriLibri
-                .Include(a => a.Autori)
-                .Include(a => a.Libri)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (autoriLibri == null)
-            {
-                return NotFound();
-            }
-
-            return View(autoriLibri);
-        }
-
+       
         // GET: AutoriLibri/Create
         public IActionResult Create()
         {
-            ViewData["AutoriId"] = new SelectList(_context.Autori, "Emri", "Emri");
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Titulli", "Titulli");
+            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id");
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id");
             return View();
         }
 
@@ -66,8 +47,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id", autoriLibri.AutoriId);
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", autoriLibri.LibriId);
+            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id");
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id");
             return View(autoriLibri);
         }
 
@@ -84,8 +65,10 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id", autoriLibri.AutoriId);
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", autoriLibri.LibriId);
+            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id");
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id");/*
+            ViewData["AutoriEmri"] = new SelectList(_context.Autori, "Emri", "Emri");
+            ViewData["LibriEmri"] = new SelectList(_context.Libri, "Titulli", "Titulli");*/
             return View(autoriLibri);
         }
 
