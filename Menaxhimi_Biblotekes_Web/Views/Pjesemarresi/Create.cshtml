@@ -1,4 +1,4 @@
-﻿@model Menaxhimi_Biblotekes.Models.Pjesemarresi
+﻿@model RoliPjesemarresit
 
 @{
     ViewData["Title"] = "Create";
@@ -13,64 +13,62 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="RoliId" class="control-label"></label>
-                <input asp-for="RoliId" class="form-control" />
-                <span asp-validation-for="RoliId" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.Emri" class="control-label"></label>
+                <input asp-for="Pjesemarresi.Emri" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.Emri" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Emri" class="control-label"></label>
-                <input asp-for="Emri" class="form-control" />
-                <span asp-validation-for="Emri" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.Mbiemri" class="control-label"></label>
+                <input asp-for="Pjesemarresi.Mbiemri" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.Mbiemri" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Mbiemri" class="control-label"></label>
-                <input asp-for="Mbiemri" class="form-control" />
-                <span asp-validation-for="Mbiemri" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.Email" class="control-label"></label>
+                <input asp-for="Pjesemarresi.Email" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.Perdoruesi" class="control-label"></label>
+                <input asp-for="Pjesemarresi.Perdoruesi" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.Perdoruesi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Perdoruesi" class="control-label"></label>
-                <input asp-for="Perdoruesi" class="form-control" />
-                <span asp-validation-for="Perdoruesi" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.Fjalekalimi" class="control-label"></label>
+                <input asp-for="Pjesemarresi.Fjalekalimi" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.Fjalekalimi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Fjalekalimi" class="control-label"></label>
-                <input asp-for="Fjalekalimi" class="form-control" />
-                <span asp-validation-for="Fjalekalimi" class="text-danger"></span>
+                <select  class="form-control" asp-for="RoliId" asp-items="@Model.Rolet"></select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                    <input class="form-check-input" asp-for="Pjesemarresi.IsDeleted" /> @Html.DisplayNameFor(model => model.Pjesemarresi.IsDeleted)
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    <input class="form-check-input" asp-for="Pjesemarresi.IsActive" /> @Html.DisplayNameFor(model => model.Pjesemarresi.IsActive)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedByUserID" class="control-label"></label>
-                <input asp-for="CreatedByUserID" class="form-control" />
-                <span asp-validation-for="CreatedByUserID" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.CreatedByUserID" class="control-label"></label>
+                <input asp-for="Pjesemarresi.CreatedByUserID" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.CreatedByUserID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedOn" class="control-label"></label>
-                <input asp-for="CreatedOn" class="form-control" />
-                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.CreatedOn" class="control-label"></label>
+                <input asp-for="Pjesemarresi.CreatedOn" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.CreatedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastUpdatedByUserID" class="control-label"></label>
-                <input asp-for="LastUpdatedByUserID" class="form-control" />
-                <span asp-validation-for="LastUpdatedByUserID" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.LastUpdatedByUserID" class="control-label"></label>
+                <input asp-for="Pjesemarresi.LastUpdatedByUserID" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.LastUpdatedByUserID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastUpdatedOn" class="control-label"></label>
-                <input asp-for="LastUpdatedOn" class="form-control" />
-                <span asp-validation-for="LastUpdatedOn" class="text-danger"></span>
+                <label asp-for="Pjesemarresi.LastUpdatedOn" class="control-label"></label>
+                <input asp-for="Pjesemarresi.LastUpdatedOn" class="form-control" />
+                <span asp-validation-for="Pjesemarresi.LastUpdatedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

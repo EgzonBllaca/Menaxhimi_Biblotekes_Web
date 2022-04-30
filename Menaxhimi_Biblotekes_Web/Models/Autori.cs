@@ -7,6 +7,7 @@ namespace Menaxhimi_Biblotekes.Models
 {
     public class Autori
     {
+        [Key]
         public int Id { get; set; }
         public string Emri { get; set; }
         public string Mbiemri { get; set; }

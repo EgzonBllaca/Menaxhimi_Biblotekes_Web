@@ -1,11 +1,13 @@
 ﻿using Menaxhimi_Biblotekes.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Menaxhimi_Biblotekes_Web.Models
 {
     public class Libri
     {
+        [Key]
         public int Id { get; set; }
         public int KategoriaId { get; set; }
         public string Titulli { get; set; }

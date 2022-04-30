@@ -6,6 +6,7 @@ namespace Menaxhimi_Biblotekes.Models
 {
     public class Huazimi
     {
+        [Key]
         public int Id { get; set; }
         public int LibriId { get; set; }
         public int PjesemarresiId { get; set; }

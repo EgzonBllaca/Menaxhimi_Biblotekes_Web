@@ -1,4 +1,4 @@
-﻿@model Menaxhimi_Biblotekes_Web.Models.AutoriLibri
+﻿@model Menaxhimi_Biblotekes_Web.Models.Autoresia
 
 @{
     ViewData["Title"] = "Create";
@@ -13,9 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Libri.KategoriaId" class="control-label"></label>
-                <input asp-for="Libri.KategoriaId" class="form-control" />
-                <span asp-validation-for="Libri.KategoriaId" class="text-danger"></span>
+               <select class="form-control" asp-for="KategoriaId" asp-items="@Model.Kategorite"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Libri.Titulli" class="control-label"></label>
@@ -52,6 +50,10 @@
                 <input asp-for="Libri.NrKopjeve" class="form-control" />
                 <span asp-validation-for="Libri.NrKopjeve" class="text-danger"></span>
             </div>
+            <div class="form-group">
+               <select multiple="multiple" class="form-control" asp-for="AutoriIds" asp-items="@Model.Autoret"></select>
+            </div>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Libri.IsDeleted" /> @Html.DisplayNameFor(model => model.Libri.IsDeleted)

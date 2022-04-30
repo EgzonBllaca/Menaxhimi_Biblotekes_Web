@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Menaxhimi_Biblotekes_Web.Models;
+using Menaxhimi_Biblotekes.Models;
 
 namespace Menaxhimi_Biblotekes_Web.Controllers
 {
@@ -45,7 +46,20 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // GET: Libris/Create
         public IActionResult Create()
         {
-            return View();
+            ICollection<Autori> Autoret = _context.Autori.ToList();
+            Autoresia a = new Autoresia();
+            a.Autoret = new List<SelectListItem>();
+            foreach(Autori autori in Autoret)
+            {
+                a.Autoret.Add(new SelectListItem { Text = autori.Emri + " " + autori.Mbiemri, Value = autori.Id.ToString() });
+            }
+            ICollection<Kategoria> Kategorite = _context.Kategoria.ToList();
+            a.Kategorite = new List<SelectListItem>();
+            foreach (var k in Kategorite)
+            {
+                a.Kategorite.Add(new SelectListItem { Text = k.Name , Value = k.KategoriaID.ToString() });
+            }
+            return View(a);
         }
 
         // POST: Libris/Create
@@ -53,17 +67,39 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KategoriaId,Titulli,Image,Pershkrimi,ISBN,ShtepiaBotuese,VitiBotimit,NrKopjeve,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] Libri libri)
+        public async Task<IActionResult> Create(Autoresia autoresia)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(libri);/*
-                [Bind("")]
-                _context.Add()*/
-                await _context.SaveChangesAsync();
+                using (var transaction = _context.Database.BeginTransaction()) 
+                {
+                    try
+                    {
+                        _context.Libri.Add(autoresia.Libri);
+                        await _context.SaveChangesAsync();
+
+                        ICollection<AutoriLibri> autoriLibri = new List<AutoriLibri>();
+                        foreach (var item in autoresia.AutoriIds)
+                        {
+                            autoriLibri.Add(new AutoriLibri { LibriId = autoresia.Libri.Id, AutoriId = item });
+                        }
+                        _context.AutoriLibri.AddRange(autoriLibri);
+                        await _context.SaveChangesAsync();
+
+                        KategoriaLibri k = new KategoriaLibri { LibriId = autoresia.Libri.Id, KategoriaId = autoresia.KategoriaId };
+                        _context.KategoriaLibri.Add(k);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(libri);
+            return View();
         }
 
         // GET: Libris/Edit/5

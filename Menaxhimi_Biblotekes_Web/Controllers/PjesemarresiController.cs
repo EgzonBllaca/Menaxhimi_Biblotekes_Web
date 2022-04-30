@@ -46,7 +46,14 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // GET: Pjesemarresis/Create
         public IActionResult Create()
         {
-            return View();
+            ICollection<Roli> Rolet = _context.Roli.ToList();
+            RoliPjesemarresit p = new RoliPjesemarresit();
+            p.Rolet = new List<SelectListItem>();
+            foreach (Roli r in Rolet)
+            {
+                p.Rolet.Add(new SelectListItem { Text = r.Pershkrimi, Value = r.Id.ToString() });
+            }
+            return View(p);
         }
 
         // POST: Pjesemarresis/Create
@@ -54,15 +61,31 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RoliId,Emri,Mbiemri,Email,Perdoruesi,Fjalekalimi,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] Pjesemarresi pjesemarresi)
+        public async Task<IActionResult> Create(RoliPjesemarresit roliPjesemarresit)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pjesemarresi);
-                await _context.SaveChangesAsync();
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        roliPjesemarresit.Pjesemarresi.RoliId = roliPjesemarresit.RoliId;
+                        _context.Pjesemarresi.Add(roliPjesemarresit.Pjesemarresi);
+                        await _context.SaveChangesAsync();
+                        PjesemarresiRoli pjesemarresiRoli = new PjesemarresiRoli { PjesemarresiId = roliPjesemarresit.Pjesemarresi.Id, RoliId = roliPjesemarresit.RoliId };
+                        _context.PjesemarresiRoli.Add(pjesemarresiRoli);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pjesemarresi);
+            return View();
         }
 
         // GET: Pjesemarresis/Edit/5
