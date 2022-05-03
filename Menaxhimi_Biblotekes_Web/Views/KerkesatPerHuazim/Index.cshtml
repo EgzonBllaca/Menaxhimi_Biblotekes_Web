@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Menaxhimi_Biblotekes_Web.Models.KerkesatPerHuazim>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataKerkeses)
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedOn)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Libri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pjesemarresi)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataKerkeses)
+            </td>@*
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedOn)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Libri.Titulli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pjesemarresi.Emri)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
