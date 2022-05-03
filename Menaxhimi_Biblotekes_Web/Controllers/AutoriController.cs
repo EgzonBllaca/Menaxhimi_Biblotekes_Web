@@ -18,7 +18,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Autori
         public async Task<IActionResult> Index()
         {
@@ -39,7 +39,6 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-
             return View(autori);
         }
 
