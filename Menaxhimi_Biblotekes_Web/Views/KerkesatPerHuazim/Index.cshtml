@@ -12,9 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DataKerkeses)
-            </th>
            @* <th>
                 @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
@@ -39,15 +36,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Pjesemarresi)
             </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DataKerkeses"]">@Html.DisplayNameFor(model => model.DataKerkeses)</a>
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataKerkeses)
-            </td>@*
+        <tr>@*
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
@@ -71,6 +68,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Pjesemarresi.Emri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataKerkeses)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

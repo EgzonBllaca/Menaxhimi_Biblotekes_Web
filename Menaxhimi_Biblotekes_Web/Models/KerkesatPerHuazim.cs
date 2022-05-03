@@ -13,6 +13,7 @@ namespace Menaxhimi_Biblotekes_Web.Models
 
         [Required(ErrorMessage = "Duhet te zgjidhni nje perdorues")]
         public int PjesemarresiId { get; set; }
+        [Display(Name = "Data e Kerkeses")]
         public DateTime DataKerkeses { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }

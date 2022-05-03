@@ -19,10 +19,20 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: KerkesatPerHuazim
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var biblotekaDbContext = _context.KerkesatPerHuazim.Include(k => k.Libri).Include(k => k.Pjesemarresi);
-            return View(await biblotekaDbContext.ToListAsync());
+            var huazimi = _context.KerkesatPerHuazim.Include(k => k.Libri).Include(k => k.Pjesemarresi).ToList();
+            ViewData["DataKerkeses"] = String.IsNullOrEmpty(sortOrder) ? "huazimi_desc" : "";
+            switch (sortOrder)
+            {
+                case "huazimi_desc":
+                    huazimi = huazimi.OrderByDescending(s => s.DataKerkeses).ToList();
+                    break;
+                default:
+                    huazimi = huazimi.OrderBy(s => s.DataKerkeses).ToList();
+                    break;
+            }
+            return View(huazimi);
         }
 
         // GET: KerkesatPerHuazim/Details/5
@@ -48,8 +58,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // GET: KerkesatPerHuazim/Create
         public IActionResult Create()
         {
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "ISBN");
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email");
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Titulli");
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Perdoruesi");
             return View();
         }
 
@@ -62,12 +72,13 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                kerkesatPerHuazim.DataKerkeses = DateTime.Now;
                 _context.Add(kerkesatPerHuazim);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            }/*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "ISBN", kerkesatPerHuazim.LibriId);
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);*/
             return View(kerkesatPerHuazim);
         }
 
@@ -84,8 +95,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "ISBN", kerkesatPerHuazim.LibriId);
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Titulli", kerkesatPerHuazim.LibriId);
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Perdoruesi", kerkesatPerHuazim.PjesemarresiId);
             return View(kerkesatPerHuazim);
         }
 
@@ -105,6 +116,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 try
                 {
+                    kerkesatPerHuazim.DataKerkeses = DateTime.Now;
                     _context.Update(kerkesatPerHuazim);
                     await _context.SaveChangesAsync();
                 }
@@ -120,9 +132,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            }/*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "ISBN", kerkesatPerHuazim.LibriId);
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);*/
             return View(kerkesatPerHuazim);
         }
 

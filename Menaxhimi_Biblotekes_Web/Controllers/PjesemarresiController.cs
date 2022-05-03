@@ -20,9 +20,16 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: Pjesemarresis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.Pjesemarresi.ToListAsync());
+            ViewData["PjesemarresiFilter"] = search;
+            var pjesemarresit = _context.Pjesemarresi.ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                pjesemarresit = pjesemarresit.Where(s => s.Emri.ToUpper().Contains(search.ToUpper())||s.Mbiemri.ToUpper().Contains(search.ToUpper())).ToList();
+            }
+            return View(pjesemarresit);
         }
 
         // GET: Pjesemarresis/Details/5

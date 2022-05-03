@@ -13,11 +13,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="LibriId" class="control-label"></label>
+                <label asp-for="Libri" class="control-label"></label>
                 <select asp-for="LibriId" class ="form-control" asp-items="ViewBag.LibriId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="PjesemarresiId" class="control-label"></label>
+                <label asp-for="Pjesemarresi" class="control-label"></label>
                 <select asp-for="PjesemarresiId" class ="form-control" asp-items="ViewBag.PjesemarresiId"></select>
             </div>
             <div class="form-group">
@@ -40,6 +40,7 @@
                 <input asp-for="Verejtje" class="form-control" />
                 <span asp-validation-for="Verejtje" class="text-danger"></span>
             </div>
+            @*
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
@@ -50,7 +51,7 @@
                     <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
                 </label>
             </div>
-          @*  <div class="form-group">
+            <div class="form-group">
                 <label asp-for="CreatedByUserID" class="control-label"></label>
                 <input asp-for="CreatedByUserID" class="form-control" />
                 <span asp-validation-for="CreatedByUserID" class="text-danger"></span>
@@ -69,10 +70,10 @@
                 <label asp-for="LastUpdatedOn" class="control-label"></label>
                 <input asp-for="LastUpdatedOn" class="form-control" />
                 <span asp-validation-for="LastUpdatedOn" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-            </div>*@
+            </div>
         </form>
     </div>
 </div>

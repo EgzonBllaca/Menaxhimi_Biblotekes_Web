@@ -17,11 +17,12 @@ namespace Menaxhimi_Biblotekes_Web.Models
         public int KategoriaId { get; set; }
         
         [Required(ErrorMessage = "Libri duhet te kete nje titull")]
-        public string Titulli { get; set; }
-        public string Image { get; set; }
+        public string Titulli { get; set; }/*
+        public string Image { get; set; }*/
 
         public string Pershkrimi { get; set; }
         [Required(ErrorMessage ="Libri duhet ta kete nje ISBN")]
+        [StringLength(13,MinimumLength = 13,ErrorMessage = "ISBN duhet te kete 13 shifra")]
         public string ISBN { get; set; }
         [Required(ErrorMessage = "Libri duhet ta kete nje shtepi botuese")]
         [Display(Name = "Shtepia e botuesit")]

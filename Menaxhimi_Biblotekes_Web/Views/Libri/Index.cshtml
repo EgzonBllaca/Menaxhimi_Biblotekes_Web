@@ -9,6 +9,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions">
+        <p>
+            Kerko sipas titullit: 
+            <input type="text" name="search" value="@ViewData["LibriFilter"]" />
+            <input type="submit" value="Kerko" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.KategoriaId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Titulli)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitulliSort"]">@Html.DisplayNameFor(model => model.Titulli)</a>
             </th>@*
             <th>
                 @Html.DisplayNameFor(model => model.Image)
@@ -31,7 +42,7 @@
                 @Html.DisplayNameFor(model => model.ShtepiaBotuese)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VitiBotimit)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VitiSort"]">@Html.DisplayNameFor(model => model.VitiBotimit)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NrKopjeve)

@@ -20,9 +20,33 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: Libris
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string search)
         {
-            return View(await _context.Libri.ToListAsync());
+            ViewData["TitulliSort"] = String.IsNullOrEmpty(sortOrder) ? "titulli_desc" : "";
+            ViewData["VitiSort"] = sortOrder == "Viti" ? "viti_desc" : "Viti";
+            ViewData["LibriFilter"] = search;
+            var librat = _context.Libri.ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                librat = librat.Where(s => s.Titulli.ToUpper().Contains(search.ToUpper())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "titulli_desc":
+                    librat = librat.OrderByDescending(s => s.Titulli).ToList();
+                    break;
+                case "Viti":
+                    librat = librat.OrderBy(s => s.VitiBotimit).ToList();
+                    break;
+                case "viti_desc":
+                    librat = librat.OrderByDescending(s => s.VitiBotimit).ToList();
+                    break;
+                default:
+                    librat = librat.OrderBy(s => s.Titulli).ToList();
+                    break;
+            }
+            return View(librat);
         }
 
         // GET: Libris/Details/5

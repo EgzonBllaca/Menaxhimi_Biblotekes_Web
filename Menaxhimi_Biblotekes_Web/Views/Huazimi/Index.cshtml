@@ -14,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DataHuazimit)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DataHuazimitSort"]">@Html.DisplayNameFor(model => model.DataHuazimit)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AfatiKthimit)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AfatiKthimitSort"]">@Html.DisplayNameFor(model => model.AfatiKthimit)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataKthimit)

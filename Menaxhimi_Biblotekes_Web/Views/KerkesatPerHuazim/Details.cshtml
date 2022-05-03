@@ -10,13 +10,7 @@
     <h4>KerkesatPerHuazim</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataKerkeses)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataKerkeses)
-        </dd>
-        <dt class = "col-sm-2">
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsDeleted)
         </dt>
         <dd class = "col-sm-10">
@@ -51,18 +45,60 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.LastUpdatedOn)
-        </dd>
+        </dd>*@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Libri)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Libri.Titulli)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Libri.ShtepiaBotuese)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Libri.ShtepiaBotuese)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Libri.ISBN)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Libri.ISBN)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pjesemarresi)
+            @Html.DisplayNameFor(model => model.Libri.VitiBotimit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Libri.VitiBotimit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pjesemarresi.Emri)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pjesemarresi.Emri)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pjesemarresi.Mbiemri)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pjesemarresi.Mbiemri)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pjesemarresi.Perdoruesi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pjesemarresi.Perdoruesi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pjesemarresi.Email)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Pjesemarresi.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataKerkeses)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataKerkeses)
         </dd>
     </dl>
 </div>

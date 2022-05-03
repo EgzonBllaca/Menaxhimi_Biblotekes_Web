@@ -20,9 +20,16 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: Autori
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.Autori.ToListAsync());
+            ViewData["AutoriFilter"] = search;
+            var autoret = _context.Autori.ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                autoret = autoret.Where(s => s.Emri.ToUpper().Contains(search.ToUpper()) || s.Mbiemri.ToUpper().Contains(search.ToUpper())).ToList();
+            }
+            return View(autoret);
         }
 
         // GET: Autori/Details/5

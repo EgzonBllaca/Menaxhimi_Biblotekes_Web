@@ -20,10 +20,36 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: Huazimi
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var biblotekaDbContext = _context.Huazimi.Include(h => h.Libri).Include(h => h.Pjesemarresi);
-            return View(await biblotekaDbContext.ToListAsync());
+            try
+            {
+                var huazimi = _context.Huazimi.Include(h => h.Libri).Include(h => h.Pjesemarresi).ToList(); 
+                ViewData["DataHuazimitSort"] = String.IsNullOrEmpty(sortOrder) ? "huazimi_desc" : "";
+                ViewData["AfatiKthimitSort"] = sortOrder == "Afati" ? "afati_desc" : "Afati";
+                switch (sortOrder)
+                {
+                    case "huazimi_desc":
+                        huazimi = huazimi.OrderByDescending(s => s.DataHuazimit).ToList();
+                        break;
+                    case "Afati":
+                        huazimi = huazimi.OrderBy(s => s.AfatiKthimit).ToList();
+                        break;
+                    case "afati_desc":
+                        huazimi = huazimi.OrderByDescending(s => s.AfatiKthimit).ToList();
+                        break;
+                    default:
+                        huazimi = huazimi.OrderBy(s => s.DataHuazimit).ToList();
+                        break;
+                }
+                return View(huazimi);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+            
         }
 
         // GET: Huazimi/Details/5
@@ -49,8 +75,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // GET: Huazimi/Create
         public IActionResult Create()
         {
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id");
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id");
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Titulli");
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Perdoruesi");
             return View();
         }
 
@@ -66,9 +92,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 _context.Add(huazimi);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            }/*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", huazimi.LibriId);
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id", huazimi.PjesemarresiId);
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id", huazimi.PjesemarresiId);*/
             return View(huazimi);
         }
 
@@ -85,8 +111,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", huazimi.LibriId);
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id", huazimi.PjesemarresiId);
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Titulli", huazimi.LibriId);
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Perdoruesi", huazimi.PjesemarresiId);
             return View(huazimi);
         }
 
@@ -121,9 +147,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            }/*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", huazimi.LibriId);
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id", huazimi.PjesemarresiId);
+            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id", huazimi.PjesemarresiId);*/
             return View(huazimi);
         }
 
