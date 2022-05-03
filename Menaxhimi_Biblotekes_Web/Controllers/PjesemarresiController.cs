@@ -39,8 +39,10 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
+            var roli = await _context.Roli.FirstOrDefaultAsync(m => m.Id == pjesemarresi.RoliId);
+            RoliPjesemarresit rp = new RoliPjesemarresit { Pjesemarresi = pjesemarresi, Roli = roli };
 
-            return View(pjesemarresi);
+            return View(rp);
         }
 
         // GET: Pjesemarresis/Create

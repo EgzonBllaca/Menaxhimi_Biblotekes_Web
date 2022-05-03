@@ -13,10 +13,11 @@ namespace Menaxhimi_Biblotekes_Web.Models
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }
         public int CreatedByUserID { get; set; }
+        
         public DateTime CreatedOn { get; set; }
         public int LastUpdatedByUserID { get; set; }
         public DateTime LastUpdatedOn { get; set; }
-        public virtual ICollection<KategoriaLibri> KategoriaLibri { get; set; }
+        public virtual ICollection<Libri> Librat { get; set; }
 
     }
 }

@@ -13,7 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-               <select class="form-control" asp-for="KategoriaId" asp-items="@Model.Kategorite"></select>
+               <select class="form-control" asp-for="Libri.KategoriaId" asp-items="@Model.Kategorite"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Libri.Titulli" class="control-label"></label>
@@ -54,7 +54,7 @@
                <select multiple="multiple" class="form-control" asp-for="AutoriIds" asp-items="@Model.Autoret"></select>
             </div>
 
-            <div class="form-group form-check">
+           @* <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Libri.IsDeleted" /> @Html.DisplayNameFor(model => model.Libri.IsDeleted)
                 </label>
@@ -83,7 +83,7 @@
                 <label asp-for="Libri.LastUpdatedOn" class="control-label"></label>
                 <input asp-for="Libri.LastUpdatedOn" class="form-control" />
                 <span asp-validation-for="Libri.LastUpdatedOn" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

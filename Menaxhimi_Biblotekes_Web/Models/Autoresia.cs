@@ -6,9 +6,6 @@ namespace Menaxhimi_Biblotekes_Web.Models
 {
     public class Autoresia
     {
-        public Autoresia()
-        {
-        }
         public Libri Libri { get; set; }/*
         public ICollection<Autori> AutoretEZgjedhur { get; set; }*/
         public int[] AutoriIds { get; set; }

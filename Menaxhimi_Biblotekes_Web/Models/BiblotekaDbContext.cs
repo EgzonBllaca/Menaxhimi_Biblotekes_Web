@@ -17,7 +17,6 @@ namespace Menaxhimi_Biblotekes_Web.Models
         public DbSet<AutoriLibri> AutoriLibri { get; set; }
         public DbSet<Huazimi> Huazimi { get; set; }
         public DbSet<Kategoria> Kategoria { get; set; }
-        public DbSet<KategoriaLibri> KategoriaLibri { get; set; }
         public DbSet<KerkesatPerHuazim> KerkesatPerHuazim { get; set; }
     }
 }

@@ -24,23 +24,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(await _context.Kategoria.ToListAsync());
         }
 
-        // GET: Kategorias/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var kategoria = await _context.Kategoria
-                .FirstOrDefaultAsync(m => m.KategoriaID == id);
-            if (kategoria == null)
-            {
-                return NotFound();
-            }
-
-            return View(kategoria);
-        }
+    
 
         // GET: Kategorias/Create
         public IActionResult Create()
