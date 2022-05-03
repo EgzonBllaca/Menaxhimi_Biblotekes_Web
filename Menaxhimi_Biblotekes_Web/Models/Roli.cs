@@ -9,6 +9,8 @@ namespace Menaxhimi_Biblotekes.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required (ErrorMessage = "Roli duhet te kete nje emer")]
+        [Display (Name ="Emri")]
         public string Pershkrimi { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }

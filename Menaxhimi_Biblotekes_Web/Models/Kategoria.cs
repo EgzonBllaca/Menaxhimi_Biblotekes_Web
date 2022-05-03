@@ -7,7 +7,9 @@ namespace Menaxhimi_Biblotekes_Web.Models
     public class Kategoria
     {
         [Key]
+        [Display(Name = "Kategoria")]
         public int KategoriaID { get; set; }
+        [Required(ErrorMessage = "Duhet te shkruani emrin e kategoris")]
         public string Name { get; set; }
 
         public bool IsDeleted { get; set; }

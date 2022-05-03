@@ -9,7 +9,6 @@ namespace Menaxhimi_Biblotekes_Web.Models
 
         }
 
-
         public DbSet<Roli> Roli { get; set; }
         public DbSet<Pjesemarresi> Pjesemarresi { get; set; }
         public DbSet<Libri> Libri { get; set; }

@@ -8,8 +8,11 @@ namespace Menaxhimi_Biblotekes.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public int LibriId { get; set; }
+        [Required]
         public int PjesemarresiId { get; set; }
+
         public DateTime DataHuazimit { get; set; }
         public DateTime AfatiKthimit { get; set; }
         public DateTime DataKthimit { get; set; }
