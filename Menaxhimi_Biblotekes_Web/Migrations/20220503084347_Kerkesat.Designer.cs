@@ -4,16 +4,18 @@ using Menaxhimi_Biblotekes_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Menaxhimi_Biblotekes_Web.Migrations
 {
     [DbContext(typeof(BiblotekaDbContext))]
-    partial class BiblotekaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503084347_Kerkesat")]
+    partial class Kerkesat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
-          #pragma warning disable 612, 618
+#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.16")
@@ -395,7 +397,7 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
             modelBuilder.Entity("Menaxhimi_Biblotekes.Models.Pjesemarresi", b =>
                 {
                     b.HasOne("Menaxhimi_Biblotekes.Models.Roli", "Roli")
-                        .WithMany("Pjesemarresi")
+                        .WithMany()
                         .HasForeignKey("RoliId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -468,11 +470,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
             modelBuilder.Entity("Menaxhimi_Biblotekes.Models.Pjesemarresi", b =>
                 {
                     b.Navigation("Huazimi");
-                });
-
-            modelBuilder.Entity("Menaxhimi_Biblotekes.Models.Roli", b =>
-                {
-                    b.Navigation("Pjesemarresi");
                 });
 
             modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.Kategoria", b =>

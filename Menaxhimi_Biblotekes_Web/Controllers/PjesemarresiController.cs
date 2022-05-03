@@ -65,24 +65,16 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var transaction = _context.Database.BeginTransaction())
-                {
                     try
                     {
                         roliPjesemarresit.Pjesemarresi.RoliId = roliPjesemarresit.RoliId;
                         _context.Pjesemarresi.Add(roliPjesemarresit.Pjesemarresi);
                         await _context.SaveChangesAsync();
-                        PjesemarresiRoli pjesemarresiRoli = new PjesemarresiRoli { PjesemarresiId = roliPjesemarresit.Pjesemarresi.Id, RoliId = roliPjesemarresit.RoliId };
-                        _context.PjesemarresiRoli.Add(pjesemarresiRoli);
-                        await _context.SaveChangesAsync();
-                        transaction.Commit();
                     }
                     catch (Exception)
                     {
-                        transaction.Rollback();
-                        throw;
+                        
                     }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View();

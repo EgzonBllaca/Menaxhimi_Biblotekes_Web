@@ -8,7 +8,6 @@ namespace Menaxhimi_Biblotekes.Models
     {
         [Key]
         public int Id { get ; set; }
-        public int RoliId { get; set; }
         public string Emri { get; set; }
         public string Mbiemri { get; set; }
         public string Email { get; set; }
@@ -20,7 +19,9 @@ namespace Menaxhimi_Biblotekes.Models
         public DateTime CreatedOn { get; set; }
         public int LastUpdatedByUserID { get; set; }
         public DateTime LastUpdatedOn { get; set; }
-        public virtual ICollection<PjesemarresiRoli> PjesemarresiRoli { get; set; }
+
+        public int RoliId { get; set; }
+        public Roli Roli { get; set; }
         public virtual ICollection<Huazimi> Huazimi { get; set; }
 
     }
