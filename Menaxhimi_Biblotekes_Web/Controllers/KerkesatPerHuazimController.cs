@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Menaxhimi_Biblotekes_Web.Models;
+using Menaxhimi_Biblotekes.Models;
 
 namespace Menaxhimi_Biblotekes_Web.Controllers
 {
@@ -68,18 +69,18 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LibriId,PjesemarresiId,DataKerkeses,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] KerkesatPerHuazim kerkesatPerHuazim)
+        public async Task<IActionResult> Create(int id/*[Bind("Id,LibriId,PjesemarresiId,DataKerkeses,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] KerkesatPerHuazim kerkesatPerHuazim*/)
         {
-            if (ModelState.IsValid)
-            {
-                kerkesatPerHuazim.DataKerkeses = DateTime.Now;
-                _context.Add(kerkesatPerHuazim);
+
+
+                KerkesatPerHuazim kerkesatPerHuazim = new KerkesatPerHuazim { DataKerkeses = DateTime.Now, LibriId = id, Pjesemarresi = new Pjesemarresi { Id = 1 } };
+                _context.KerkesatPerHuazim.Add(kerkesatPerHuazim);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }/*
+                return RedirectToAction("Index","Libri");
+            /*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "ISBN", kerkesatPerHuazim.LibriId);
             ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);*/
-            return View(kerkesatPerHuazim);
+            //return View(kerkesatPerHuazim);
         }
 
         // GET: KerkesatPerHuazim/Edit/5

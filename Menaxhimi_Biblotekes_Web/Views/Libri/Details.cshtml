@@ -1,12 +1,15 @@
 ﻿@model Menaxhimi_Biblotekes_Web.Models.Libri
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details"; 
 }
 
 <h1>Details</h1>
 
 <div>
+               
+    <form asp-controller="KerkesatPerHuazim" asp-action="Create">
+       <input type="hidden" asp-for="Id" value="@Model.Id" class="form-control" />
     <h4>Libri</h4>
     <hr />
     <dl class="row">
@@ -58,6 +61,10 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NrKopjeve)
         </dd>
+         <div class="form-group">
+                <label></label>
+                <input type="submit" value="Create" class="btn btn-primary"/>
+         </div>
        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsDeleted)
         </dt>
@@ -95,8 +102,10 @@
             @Html.DisplayFor(model => model.LastUpdatedOn)
         </dd>*@
     </dl>
+</form>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
