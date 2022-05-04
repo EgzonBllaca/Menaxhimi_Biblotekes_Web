@@ -33,7 +33,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdatedOn)
             </th>*@
-            <th></th>
+            <th>CRUD</th>
         </tr>
     </thead>
     <tbody>
@@ -42,7 +42,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+          @*  <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             <td>
@@ -59,10 +59,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastUpdatedOn)
-            </td>
+            </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.KategoriaID">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.KategoriaID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.KategoriaID"><i class="btn btn-success bi bi-pencil-square"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.KategoriaID"><i class="btn btn-danger bi bi-trash"></i></a>
             </td>
         </tr>
 }
