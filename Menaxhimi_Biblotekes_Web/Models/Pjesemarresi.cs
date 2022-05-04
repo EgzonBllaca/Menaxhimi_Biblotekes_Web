@@ -38,6 +38,7 @@ namespace Menaxhimi_Biblotekes.Models
         public int RoliId { get; set; }
         public Roli Roli { get; set; }
         public virtual ICollection<Huazimi> Huazimi { get; set; }
+        public virtual ICollection<Mesazhet> Mesazhet { get; set; }
 
     }
 }

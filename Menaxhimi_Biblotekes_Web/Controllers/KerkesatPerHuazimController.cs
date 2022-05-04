@@ -73,10 +73,14 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         {
 
 
-                KerkesatPerHuazim kerkesatPerHuazim = new KerkesatPerHuazim { DataKerkeses = DateTime.Now, LibriId = id, Pjesemarresi = new Pjesemarresi { Id = 1 } };
+            KerkesatPerHuazim kerkesatPerHuazim = new KerkesatPerHuazim { DataKerkeses = DateTime.Now, LibriId = id, PjesemarresiId = 1};
+            var check = _context.KerkesatPerHuazim.Where(x => x.LibriId == kerkesatPerHuazim.LibriId && x.PjesemarresiId == kerkesatPerHuazim.PjesemarresiId).FirstOrDefault();
+            if (check == null)
+            {
                 _context.KerkesatPerHuazim.Add(kerkesatPerHuazim);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index","Libri");
+            }
+            return RedirectToAction("Index", "Libri");
             /*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "ISBN", kerkesatPerHuazim.LibriId);
             ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Email", kerkesatPerHuazim.PjesemarresiId);*/
@@ -92,6 +96,10 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             }
 
             var kerkesatPerHuazim = await _context.KerkesatPerHuazim.FindAsync(id);
+            var libri = await _context.Libri.FindAsync(kerkesatPerHuazim.LibriId);
+            var pjesemarresi = await _context.Pjesemarresi.FindAsync(kerkesatPerHuazim.PjesemarresiId);
+            kerkesatPerHuazim.Libri = libri;
+            kerkesatPerHuazim.Pjesemarresi = pjesemarresi;
             if (kerkesatPerHuazim == null)
             {
                 return NotFound();
@@ -115,20 +123,37 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                using (var transaction = _context.Database.BeginTransaction())
                 {
-                    kerkesatPerHuazim.DataKerkeses = DateTime.Now;
-                    _context.Update(kerkesatPerHuazim);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!KerkesatPerHuazimExists(kerkesatPerHuazim.Id))
+                    try
                     {
-                        return NotFound();
+                        Huazimi huazimi = new Huazimi
+                        {
+                            LibriId = kerkesatPerHuazim.LibriId,
+                            PjesemarresiId = kerkesatPerHuazim.PjesemarresiId,
+                            AfatiKthimit = kerkesatPerHuazim.DataKerkeses,
+                            DataHuazimit = DateTime.Now
+                        };
+                        _context.KerkesatPerHuazim.Remove(kerkesatPerHuazim);
+                        await _context.SaveChangesAsync();
+                        _context.Huazimi.Add(huazimi);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
+                        if (!KerkesatPerHuazimExists(kerkesatPerHuazim.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
                         throw;
                     }
                 }
