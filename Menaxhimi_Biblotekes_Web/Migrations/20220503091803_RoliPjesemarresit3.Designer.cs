@@ -4,14 +4,16 @@ using Menaxhimi_Biblotekes_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Menaxhimi_Biblotekes_Web.Migrations
 {
     [DbContext(typeof(BiblotekaDbContext))]
-    partial class BiblotekaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503091803_RoliPjesemarresit3")]
+    partial class RoliPjesemarresit3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Emri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -49,7 +50,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mbiemri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -123,17 +123,13 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Emri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fjalekalimi")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -148,11 +144,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mbiemri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Perdoruesi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoliId")
@@ -191,7 +185,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Pershkrimi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -247,12 +240,33 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("KategoriaID");
 
                     b.ToTable("Kategoria");
+                });
+
+            modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.KategoriaLibri", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("KategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LibriId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KategoriaId");
+
+                    b.HasIndex("LibriId");
+
+                    b.ToTable("KategoriaLibri");
                 });
 
             modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.KerkesatPerHuazim", b =>
@@ -262,13 +276,19 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AfatiKthimit")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("CreatedByUserID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataKerkeses")
+                    b.Property<DateTime>("DataHuazimit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataKthimit")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -288,6 +308,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
 
                     b.Property<int>("PjesemarresiId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Verejtje")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -312,7 +335,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ISBN")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -337,19 +362,15 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShtepiaBotuese")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Titulli")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VitiBotimit")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("KategoriaId");
 
                     b.ToTable("Libri");
                 });
@@ -403,6 +424,25 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                     b.Navigation("Libri");
                 });
 
+            modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.KategoriaLibri", b =>
+                {
+                    b.HasOne("Menaxhimi_Biblotekes_Web.Models.Kategoria", "Kategoria")
+                        .WithMany("KategoriaLibri")
+                        .HasForeignKey("KategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Menaxhimi_Biblotekes_Web.Models.Libri", "Libri")
+                        .WithMany("KategoriaLibri")
+                        .HasForeignKey("LibriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Kategoria");
+
+                    b.Navigation("Libri");
+                });
+
             modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.KerkesatPerHuazim", b =>
                 {
                     b.HasOne("Menaxhimi_Biblotekes_Web.Models.Libri", "Libri")
@@ -422,17 +462,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                     b.Navigation("Pjesemarresi");
                 });
 
-            modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.Libri", b =>
-                {
-                    b.HasOne("Menaxhimi_Biblotekes_Web.Models.Kategoria", "Kategoria")
-                        .WithMany("Librat")
-                        .HasForeignKey("KategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Kategoria");
-                });
-
             modelBuilder.Entity("Menaxhimi_Biblotekes.Models.Autori", b =>
                 {
                     b.Navigation("AutoriLibri");
@@ -450,7 +479,7 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
 
             modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.Kategoria", b =>
                 {
-                    b.Navigation("Librat");
+                    b.Navigation("KategoriaLibri");
                 });
 
             modelBuilder.Entity("Menaxhimi_Biblotekes_Web.Models.Libri", b =>
@@ -458,6 +487,8 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                     b.Navigation("AutoriLibri");
 
                     b.Navigation("Huazimi");
+
+                    b.Navigation("KategoriaLibri");
                 });
 #pragma warning restore 612, 618
         }

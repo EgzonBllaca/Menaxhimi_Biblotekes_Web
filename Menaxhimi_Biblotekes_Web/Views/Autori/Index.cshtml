@@ -9,6 +9,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions">
+        <p>
+            Kerko sipas emrit/mbiemrit: 
+            <input type="text" name="search" value="@ViewData["AutoriFilter"]" />
+            <input type="submit" value="Kerko" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>

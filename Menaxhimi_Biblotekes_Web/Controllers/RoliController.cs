@@ -25,24 +25,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(await _context.Roli.ToListAsync());
         }
 
-        // GET: Roli/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var roli = await _context.Roli
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (roli == null)
-            {
-                return NotFound();
-            }
-
-            return View(roli);
-        }
-
+        
         // GET: Roli/Create
         public IActionResult Create()
         {

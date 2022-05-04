@@ -9,6 +9,17 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions">
+        <p>
+            Kerko sipas titullit: 
+            <input type="text" name="search" value="@ViewData["LibriFilter"]" />
+            <input type="submit" value="Kerko" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -16,11 +27,11 @@
                 @Html.DisplayNameFor(model => model.KategoriaId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Titulli)
-            </th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitulliSort"]">@Html.DisplayNameFor(model => model.Titulli)</a>
+            </th>@*
             <th>
                 @Html.DisplayNameFor(model => model.Image)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Pershkrimi)
             </th>
@@ -31,12 +42,12 @@
                 @Html.DisplayNameFor(model => model.ShtepiaBotuese)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VitiBotimit)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VitiSort"]">@Html.DisplayNameFor(model => model.VitiBotimit)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NrKopjeve)
             </th>
-            <th>
+          @*  <th>
                 @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th>
@@ -53,7 +64,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdatedOn)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -65,10 +76,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Titulli)
-            </td>
+            </td>@*
             <td>
                 @Html.DisplayFor(modelItem => item.Image)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Pershkrimi)
             </td>
@@ -84,7 +95,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NrKopjeve)
             </td>
-            <td>
+          @*  <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             <td>
@@ -101,7 +112,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastUpdatedOn)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

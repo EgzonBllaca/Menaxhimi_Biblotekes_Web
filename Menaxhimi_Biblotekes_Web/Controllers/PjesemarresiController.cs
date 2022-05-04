@@ -20,9 +20,16 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: Pjesemarresis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search)
         {
-            return View(await _context.Pjesemarresi.ToListAsync());
+            ViewData["PjesemarresiFilter"] = search;
+            var pjesemarresit = _context.Pjesemarresi.ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                pjesemarresit = pjesemarresit.Where(s => s.Emri.ToUpper().Contains(search.ToUpper())||s.Mbiemri.ToUpper().Contains(search.ToUpper())).ToList();
+            }
+            return View(pjesemarresit);
         }
 
         // GET: Pjesemarresis/Details/5
@@ -39,6 +46,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
+            var roli = await _context.Roli.FirstOrDefaultAsync(m => m.Id == pjesemarresi.RoliId);
+            pjesemarresi.Roli = roli;
+            //RoliPjesemarresit rp = new RoliPjesemarresit { Pjesemarresi = pjesemarresi, Roli = roli };
 
             return View(pjesemarresi);
         }
@@ -93,7 +103,14 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-            return View(pjesemarresi);
+            List<SelectListItem> rolet = new List<SelectListItem>();
+            var roli =  _context.Roli.ToList();
+            foreach (var item in roli)
+            {
+                rolet.Add(new SelectListItem { Text = item.Pershkrimi, Value = item.Id.ToString() });
+            }
+            RoliPjesemarresit rp = new RoliPjesemarresit { Pjesemarresi = pjesemarresi, Rolet = rolet };
+            return View(rp);
         }
 
         // POST: Pjesemarresis/Edit/5
@@ -101,9 +118,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RoliId,Emri,Mbiemri,Email,Perdoruesi,Fjalekalimi,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] Pjesemarresi pjesemarresi)
+        public async Task<IActionResult> Edit(int id, RoliPjesemarresit pjesemarresi)
         {
-            if (id != pjesemarresi.Id)
+            if (id != pjesemarresi.Pjesemarresi.Id)
             {
                 return NotFound();
             }
@@ -117,7 +134,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PjesemarresiExists(pjesemarresi.Id))
+                    if (!PjesemarresiExists(pjesemarresi.Pjesemarresi.Id))
                     {
                         return NotFound();
                     }

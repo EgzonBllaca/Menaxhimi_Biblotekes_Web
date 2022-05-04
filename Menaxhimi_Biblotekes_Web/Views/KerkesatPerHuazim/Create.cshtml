@@ -1,4 +1,4 @@
-﻿@model Menaxhimi_Biblotekes.Models.Roli
+﻿@model Menaxhimi_Biblotekes_Web.Models.KerkesatPerHuazim
 
 @{
     ViewData["Title"] = "Create";
@@ -6,18 +6,26 @@
 
 <h1>Create</h1>
 
-<h4>Roli</h4>
+<h4>KerkesatPerHuazim</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Pershkrimi" class="control-label"></label>
-                <input asp-for="Pershkrimi" class="form-control" />
-                <span asp-validation-for="Pershkrimi" class="text-danger"></span>
+                <label asp-for="Libri" class="control-label"></label>
+                <select asp-for="LibriId" class ="form-control" asp-items="ViewBag.LibriId"></select>
             </div>
-            @*<div class="form-group form-check">
+            <div class="form-group">
+                <label asp-for="Pjesemarresi" class="control-label"></label>
+                <select asp-for="PjesemarresiId" class ="form-control" asp-items="ViewBag.PjesemarresiId"></select>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="DataKerkeses" class="control-label"></label>
+                <input asp-for="DataKerkeses" class="form-control" />
+                <span asp-validation-for="DataKerkeses" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>

@@ -1,4 +1,4 @@
-﻿@model Menaxhimi_Biblotekes_Web.Models.Libri
+﻿    @model Menaxhimi_Biblotekes_Web.Models.Autoresia
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,49 +11,52 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+            <input type="hidden" asp-for="Libri.Id" />
+
             <div class="form-group">
-                <label asp-for="KategoriaId" class="control-label"></label>
-                <input asp-for="KategoriaId" class="form-control" />
-                <span asp-validation-for="KategoriaId" class="text-danger"></span>
+               <select class="form-control" asp-for="Libri.KategoriaId" asp-items="@Model.Kategorite"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Titulli" class="control-label"></label>
-                <input asp-for="Titulli" class="form-control" />
-                <span asp-validation-for="Titulli" class="text-danger"></span>
+                <label asp-for="Libri.Titulli" class="control-label"></label>
+                <input asp-for="Libri.Titulli" class="form-control" />
+                <span asp-validation-for="Libri.Titulli" class="text-danger"></span>
+            </div>@*
+            <div class="form-group">
+                <label asp-for="Libri.Image" class="control-label"></label>
+                <input asp-for="Libri.Image" class="form-control" />
+                <span asp-validation-for="Libri.Image" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Libri.Pershkrimi" class="control-label"></label>
+                <input asp-for="Libri.Pershkrimi" class="form-control" />
+                <span asp-validation-for="Libri.Pershkrimi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label asp-for="Libri.ISBN" class="control-label"></label>
+                <input asp-for="Libri.ISBN" class="form-control" />
+                <span asp-validation-for="Libri.ISBN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pershkrimi" class="control-label"></label>
-                <input asp-for="Pershkrimi" class="form-control" />
-                <span asp-validation-for="Pershkrimi" class="text-danger"></span>
+                <label asp-for="Libri.ShtepiaBotuese" class="control-label"></label>
+                <input asp-for="Libri.ShtepiaBotuese" class="form-control" />
+                <span asp-validation-for="Libri.ShtepiaBotuese" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ISBN" class="control-label"></label>
-                <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
+                <label asp-for="Libri.VitiBotimit" class="control-label"></label>
+                <input asp-for="Libri.VitiBotimit" class="form-control" />
+                <span asp-validation-for="Libri.VitiBotimit" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ShtepiaBotuese" class="control-label"></label>
-                <input asp-for="ShtepiaBotuese" class="form-control" />
-                <span asp-validation-for="ShtepiaBotuese" class="text-danger"></span>
-            </div>
+                <label asp-for="Libri.NrKopjeve" class="control-label"></label>
+                <input asp-for="Libri.NrKopjeve" class="form-control" />
+                <span asp-validation-for="Libri.NrKopjeve" class="text-danger"></span>
+            </div>@*
             <div class="form-group">
-                <label asp-for="VitiBotimit" class="control-label"></label>
-                <input asp-for="VitiBotimit" class="form-control" />
-                <span asp-validation-for="VitiBotimit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NrKopjeve" class="control-label"></label>
-                <input asp-for="NrKopjeve" class="form-control" />
-                <span asp-validation-for="NrKopjeve" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
+               <select multiple="multiple" class="form-control" asp-for="AutoriIds" asp-items="@Model.Autoret"></select>
+            </div>*@
+@*            <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
@@ -82,7 +85,7 @@
                 <label asp-for="LastUpdatedOn" class="control-label"></label>
                 <input asp-for="LastUpdatedOn" class="form-control" />
                 <span asp-validation-for="LastUpdatedOn" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

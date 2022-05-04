@@ -4,14 +4,16 @@ using Menaxhimi_Biblotekes_Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Menaxhimi_Biblotekes_Web.Migrations
 {
     [DbContext(typeof(BiblotekaDbContext))]
-    partial class BiblotekaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220503134859_Remove-KategoriaLibri")]
+    partial class RemoveKategoriaLibri
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +35,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Emri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -49,7 +50,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mbiemri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -123,17 +123,13 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Emri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fjalekalimi")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -148,11 +144,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mbiemri")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Perdoruesi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoliId")
@@ -191,7 +185,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Pershkrimi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -247,7 +240,6 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("KategoriaID");
@@ -262,13 +254,19 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AfatiKthimit")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("CreatedByUserID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataKerkeses")
+                    b.Property<DateTime>("DataHuazimit")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataKthimit")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -288,6 +286,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
 
                     b.Property<int>("PjesemarresiId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Verejtje")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -312,7 +313,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ISBN")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -337,11 +340,9 @@ namespace Menaxhimi_Biblotekes_Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShtepiaBotuese")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Titulli")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VitiBotimit")

@@ -29,8 +29,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // GET: AutoriLibri/Create
         public IActionResult Create()
         {
-            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id");
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id");
+            ViewData["AutoriId"] = new SelectList(_context.Autori,"Id","Emri");
+            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Titulli");
             return View();
         }
 
@@ -65,10 +65,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id");
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id");/*
-            ViewData["AutoriEmri"] = new SelectList(_context.Autori, "Emri", "Emri");
-            ViewData["LibriEmri"] = new SelectList(_context.Libri, "Titulli", "Titulli");*/
+            ViewData["Autori"] = new SelectList(_context.Autori,"Id","Emri",autoriLibri.AutoriId);
+            ViewData["Libri"] = new SelectList(_context.Libri, "Id","Titulli",autoriLibri.LibriId);
             return View(autoriLibri);
         }
 
@@ -83,7 +81,6 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
@@ -104,8 +101,6 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AutoriId"] = new SelectList(_context.Autori, "Id", "Id", autoriLibri.AutoriId);
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", autoriLibri.LibriId);
             return View(autoriLibri);
         }
 

@@ -9,7 +9,9 @@ namespace Menaxhimi_Biblotekes.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required (ErrorMessage = "Autori duhet te kete emer")]
         public string Emri { get; set; }
+        [Required (ErrorMessage = "Autori duhet te kete mbiemer")]
         public string Mbiemri { get; set; }
         //public bool IsDeleted { get; set; }
 

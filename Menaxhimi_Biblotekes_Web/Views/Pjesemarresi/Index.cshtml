@@ -9,12 +9,22 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-action="Index" method="get">
+    <div class="form-actions">
+        <p>
+            Kerko sipas emrit/mbiemrit: 
+            <input type="text" name="search" value="@ViewData["PjesemarresiFilter"]" />
+            <input type="submit" value="Kerko" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
-        <tr>
+        <tr>@*
             <th>
                 @Html.DisplayNameFor(model => model.RoliId)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Emri)
             </th>
@@ -26,11 +36,11 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Perdoruesi)
-            </th>
+            </th>@*
             <th>
                 @Html.DisplayNameFor(model => model.Fjalekalimi)
-            </th>
-            <th>
+            </th>*@
+         @*   <th>
                 @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th>
@@ -47,16 +57,16 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdatedOn)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr>@*
             <td>
                 @Html.DisplayFor(modelItem => item.RoliId)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Emri)
             </td>
@@ -72,7 +82,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Fjalekalimi)
             </td>
-            <td>
+          @*  <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             <td>
@@ -89,7 +99,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastUpdatedOn)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

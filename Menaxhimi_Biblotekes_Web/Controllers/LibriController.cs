@@ -20,9 +20,33 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: Libris
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string search)
         {
-            return View(await _context.Libri.ToListAsync());
+            ViewData["TitulliSort"] = String.IsNullOrEmpty(sortOrder) ? "titulli_desc" : "";
+            ViewData["VitiSort"] = sortOrder == "Viti" ? "viti_desc" : "Viti";
+            ViewData["LibriFilter"] = search;
+            var librat = _context.Libri.ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                librat = librat.Where(s => s.Titulli.ToUpper().Contains(search.ToUpper())).ToList();
+            }
+            switch (sortOrder)
+            {
+                case "titulli_desc":
+                    librat = librat.OrderByDescending(s => s.Titulli).ToList();
+                    break;
+                case "Viti":
+                    librat = librat.OrderBy(s => s.VitiBotimit).ToList();
+                    break;
+                case "viti_desc":
+                    librat = librat.OrderByDescending(s => s.VitiBotimit).ToList();
+                    break;
+                default:
+                    librat = librat.OrderBy(s => s.Titulli).ToList();
+                    break;
+            }
+            return View(librat);
         }
 
         // GET: Libris/Details/5
@@ -49,7 +73,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             ICollection<Autori> Autoret = _context.Autori.ToList();
             Autoresia a = new Autoresia();
             a.Autoret = new List<SelectListItem>();
-            foreach(Autori autori in Autoret)
+            foreach (Autori autori in Autoret)
             {
                 a.Autoret.Add(new SelectListItem { Text = autori.Emri + " " + autori.Mbiemri, Value = autori.Id.ToString() });
             }
@@ -57,7 +81,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             a.Kategorite = new List<SelectListItem>();
             foreach (var k in Kategorite)
             {
-                a.Kategorite.Add(new SelectListItem { Text = k.Name , Value = k.KategoriaID.ToString() });
+                a.Kategorite.Add(new SelectListItem { Text = k.Name, Value = k.KategoriaID.ToString() });
             }
             return View(a);
         }
@@ -71,7 +95,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var transaction = _context.Database.BeginTransaction()) 
+                using (var transaction = _context.Database.BeginTransaction())
                 {
                     try
                     {
@@ -86,9 +110,6 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                         _context.AutoriLibri.AddRange(autoriLibri);
                         await _context.SaveChangesAsync();
 
-                        KategoriaLibri k = new KategoriaLibri { LibriId = autoresia.Libri.Id, KategoriaId = autoresia.KategoriaId };
-                        _context.KategoriaLibri.Add(k);
-                        await _context.SaveChangesAsync();
                         transaction.Commit();
                     }
                     catch (Exception)
@@ -109,13 +130,21 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             {
                 return NotFound();
             }
-
+            ICollection<Autori> Autoret = _context.Autori.ToList();
+            Autoresia a = new Autoresia();
+            ICollection<Kategoria> Kategorite = _context.Kategoria.ToList();
+            a.Kategorite = new List<SelectListItem>();
+            foreach (var k in Kategorite)
+            {
+                a.Kategorite.Add(new SelectListItem { Text = k.Name, Value = k.KategoriaID.ToString() });
+            }
             var libri = await _context.Libri.FindAsync(id);
             if (libri == null)
             {
                 return NotFound();
             }
-            return View(libri);
+            a.Libri = libri;
+            return View(a);
         }
 
         // POST: Libris/Edit/5
@@ -123,68 +152,66 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,KategoriaId,Titulli,Image,Pershkrimi,ISBN,ShtepiaBotuese,VitiBotimit,NrKopjeve,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] Libri libri)
+        public async Task<IActionResult> Edit(int id, Autoresia autoresia)
         {
-            if (id != libri.Id)
+            if (id != autoresia.Libri.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+
+                using (var transaction = _context.Database.BeginTransaction())
                 {
-                    _context.Update(libri);
-                    await _context.SaveChangesAsync();
+                    try
+                    {
+                        _context.Libri.Update(autoresia.Libri);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+
+            }
+            return View(autoresia);
+        }
+            // GET: Libris/Delete/5
+            public async Task<IActionResult> Delete(int? id)
+            {
+                if (id == null)
                 {
-                    if (!LibriExists(libri.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
+
+                var libri = await _context.Libri
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (libri == null)
+                {
+                    return NotFound();
+                }
+
+                return View(libri);
+            }
+
+            // POST: Libris/Delete/5
+            [HttpPost, ActionName("Delete")]
+            [ValidateAntiForgeryToken]
+            public async Task<IActionResult> DeleteConfirmed(int id)
+            {
+                var libri = await _context.Libri.FindAsync(id);
+                _context.Libri.Remove(libri);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(libri);
-        }
 
-        // GET: Libris/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
+            private bool LibriExists(int id)
             {
-                return NotFound();
+                return _context.Libri.Any(e => e.Id == id);
             }
-
-            var libri = await _context.Libri
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (libri == null)
-            {
-                return NotFound();
-            }
-
-            return View(libri);
-        }
-
-        // POST: Libris/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var libri = await _context.Libri.FindAsync(id);
-            _context.Libri.Remove(libri);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool LibriExists(int id)
-        {
-            return _context.Libri.Any(e => e.Id == id);
         }
     }
-}

@@ -8,12 +8,13 @@ namespace Menaxhimi_Biblotekes_Web.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required (ErrorMessage = "Duhet te zgjidhni nje liber")]
         public int LibriId { get; set; }
+
+        [Required(ErrorMessage = "Duhet te zgjidhni nje perdorues")]
         public int PjesemarresiId { get; set; }
-        public DateTime DataHuazimit { get; set; }
-        public DateTime AfatiKthimit { get; set; }
-        public DateTime DataKthimit { get; set; }
-        public string Verejtje { get; set; }
+        [Display(Name = "Data e Kerkeses")]
+        public DateTime DataKerkeses { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsActive { get; set; }
         public int CreatedByUserID { get; set; }
