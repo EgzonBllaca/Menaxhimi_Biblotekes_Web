@@ -118,9 +118,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, RoliPjesemarresit pjesemarresi)
+        public async Task<IActionResult> Edit(int id, Pjesemarresi pjesemarresi)
         {
-            if (id != pjesemarresi.Pjesemarresi.Id)
+            if (id != pjesemarresi.Id)
             {
                 return NotFound();
             }
@@ -134,7 +134,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PjesemarresiExists(pjesemarresi.Pjesemarresi.Id))
+                    if (!PjesemarresiExists(pjesemarresi.Id))
                     {
                         return NotFound();
                     }

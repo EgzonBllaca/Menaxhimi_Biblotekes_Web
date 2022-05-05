@@ -51,27 +51,6 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             }
             
         }
-
-        // GET: Huazimi/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var huazimi = await _context.Huazimi
-                .Include(h => h.Libri)
-                .Include(h => h.Pjesemarresi)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (huazimi == null)
-            {
-                return NotFound();
-            }
-
-            return View(huazimi);
-        }
-
         // GET: Huazimi/Create
         public IActionResult Create()
         {
@@ -89,9 +68,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(huazimi);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                    _context.Add(huazimi);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
             }/*
             ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Id", huazimi.LibriId);
             ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Id", huazimi.PjesemarresiId);*/
