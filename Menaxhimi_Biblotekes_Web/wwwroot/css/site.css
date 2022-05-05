@@ -6,7 +6,14 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+h1{
+    padding-top:50px;
+    text-align:center;
+}
+form{
+    align-items:center;
+    align-content:center;
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -23,7 +30,19 @@ a {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-
+main table thead,tbody{
+  color:white;
+  margin:0;
+  padding:0;
+}
+main a {
+    color: #7FB5FF;
+   
+}
+main a:hover{
+    color:#C4DDFF;
+  text-decoration: none;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -69,7 +88,31 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.contactBtn {
+    border: 2px solid #ffffff;
+    border-radius:15px;
 
+}
 .bg-img {
     background-image: linear-gradient(rgba(4, 9, 30, 0.884),rgba(0, 10, 46, 0.815)), url(/css//Img//BiblotekaBanner.jpeg);
+    background-size: cover;
+}
+.HindexA {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 15px;
+    border: 2px #30AADD solid;
+    border-radius: 20px;
+}
+
+    .HindexA:hover {
+        color: #30AADD;
+        border: 2px #30AADD solid;
+        transition: 0.5s;
+        text-decoration: none;
+    }
+
+.Mcontainer{
+    position:relative;
 }

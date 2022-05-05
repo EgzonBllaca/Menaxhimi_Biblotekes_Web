@@ -56,14 +56,6 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(kerkesatPerHuazim);
         }
 
-        // GET: KerkesatPerHuazim/Create
-        public IActionResult Create()
-        {
-            ViewData["LibriId"] = new SelectList(_context.Libri, "Id", "Titulli");
-            ViewData["PjesemarresiId"] = new SelectList(_context.Pjesemarresi, "Id", "Perdoruesi");
-            return View();
-        }
-
         // POST: KerkesatPerHuazim/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
