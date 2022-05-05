@@ -10,47 +10,52 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+         <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light box-shadow" style="background:#151D3B;">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Menaxhimi_Biblotekes_Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Menaxhimi_Biblotekes_Web</a>
+                <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 text-light">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Libri" asp-action="Index">Libri</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Libri" asp-action="Index">Libri</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Autori" asp-action="Index">Autoret</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Autori" asp-action="Index">Autoret</a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Huazimi" asp-action="Index">Huazimet</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Huazimi" asp-action="Index">Huazimet</a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Kategoria" asp-action="Index">Kategorit</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Kategoria" asp-action="Index">Kategorite</a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="KerkesatPerHuazim" asp-action="Index">Kerkesat</a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Pjesemarresi" asp-action="Index">Pjesemarresit</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Mesazhet" asp-action="Index">Na kontaktoni</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="bg-img">
     <div class="m-auto" style="width:90%;">
-        <main role="main" class="pb-3">
+        <main role="main" class="">
             @RenderBody()
         </main>
     </div>
+    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Menaxhimi_Biblotekes_Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top  footer text-muted" style="background:#151D3B;">
+        <div class="container text-light">
+            &copy; 2022 - Menaxhimi_Biblotekes_Web - <a asp-area="" asp-controller="Mesazhet" asp-action="Index">Na Kontaktoni</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

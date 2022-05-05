@@ -71,14 +71,16 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id/*[Bind("Id,LibriId,PjesemarresiId,DataKerkeses,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] KerkesatPerHuazim kerkesatPerHuazim*/)
         {
-
-
             KerkesatPerHuazim kerkesatPerHuazim = new KerkesatPerHuazim { DataKerkeses = DateTime.Now, LibriId = id, PjesemarresiId = 1};
             var check = _context.KerkesatPerHuazim.Where(x => x.LibriId == kerkesatPerHuazim.LibriId && x.PjesemarresiId == kerkesatPerHuazim.PjesemarresiId).FirstOrDefault();
             if (check == null)
             {
-                _context.KerkesatPerHuazim.Add(kerkesatPerHuazim);
-                await _context.SaveChangesAsync();
+                var check2 = _context.Huazimi.Where(x => x.LibriId == kerkesatPerHuazim.LibriId && x.PjesemarresiId == kerkesatPerHuazim.PjesemarresiId).FirstOrDefault();
+                if(check2 is null)
+                {
+                    _context.KerkesatPerHuazim.Add(kerkesatPerHuazim);
+                    await _context.SaveChangesAsync();
+                }
             }
             return RedirectToAction("Index", "Libri");
             /*

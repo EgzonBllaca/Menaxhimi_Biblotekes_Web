@@ -73,8 +73,8 @@
                 @Html.DisplayFor(modelItem => item.DataKerkeses)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Aprovo</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Refuzo</a>
+                <a class="btn btn-success"asp-action="Edit" asp-route-id="@item.Id">Aprovo</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Refuzo</a>
             </td>
         </tr>
 }
