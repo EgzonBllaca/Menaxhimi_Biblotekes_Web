@@ -25,6 +25,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 {
                     m.PjesemarresiId = 1;
                     var model = _context.Mesazhet.Add(m);
+                    _context.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception)

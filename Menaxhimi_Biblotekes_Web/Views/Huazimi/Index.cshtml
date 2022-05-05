@@ -11,6 +11,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Libri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pjesemarresi)
+            </th>
+            <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DataHuazimitSort"]">@Html.DisplayNameFor(model => model.DataHuazimit)</a>
             </th>
             <th>
@@ -41,12 +47,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdatedOn)
             </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Libri)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pjesemarresi)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -55,6 +55,12 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Libri.Titulli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pjesemarresi.Emri)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataHuazimit)
                 </td>
@@ -85,12 +91,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.LastUpdatedOn)
                 </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Libri.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pjesemarresi.Id)
-                </td>
                 <td>
                   
                 <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> |

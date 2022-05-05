@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
-<body>
+<body class="bg-img">
     <header>
          <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light box-shadow" style="background:#151D3B;">
             <div class="container">
-                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">Menaxhimi_Biblotekes_Web</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index"><span style="color:orangered;">BIBLOTEKA</span>-IME</a>
                 <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,23 +37,20 @@
                          <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Pjesemarresi" asp-action="Index">Pjesemarresit</a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mesazhet" asp-action="Index">Na kontaktoni</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="bg-img" style="height:100vh">
+    <div class="">
     <div class="container">
-        <main role="main" class="text-light">
+        <main role="main" class="text-light pb-5 mb-5"style="padding-bottom:50px;">
             @RenderBody()
         </main>
     </div>
     </div>
 
-    <footer class="border-top  footer text-muted" style="background:#151D3B;">
+    <footer class="footer text-muted fixed-bottom" style="background:#151D3B;">
         <div class="container text-light">
             &copy; 2022 - Menaxhimi_Biblotekes_Web - <a asp-area="" asp-controller="Mesazhet" asp-action="Index">Na Kontaktoni</a>
         </div>

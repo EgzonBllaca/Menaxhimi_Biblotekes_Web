@@ -25,7 +25,7 @@ namespace Menaxhimi_Biblotekes_Web.Models
         [StringLength(13,MinimumLength = 13,ErrorMessage = "ISBN duhet te kete 13 shifra")]
         public string ISBN { get; set; }
         [Required(ErrorMessage = "Libri duhet ta kete nje shtepi botuese")]
-        [Display(Name = "Shtepia e botuesit")]
+        [Display(Name = "Shtepia botuese")]
         public string ShtepiaBotuese { get; set; }
         [Required(ErrorMessage = "Ju duhet te shkruani vitin e botimit te librit")]
         [Display(Name = "Viti i botimit")]

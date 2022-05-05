@@ -8,8 +8,8 @@
 
 <h4>Autori</h4>
 <hr />
-<div class="row">
-    <div class="col-md-12">
+<div class="d-flex justify-content-around">
+    <div class="">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<div>
+<div class="text-center">
     <a asp-action="Index">Back to List</a>
 </div>
 
