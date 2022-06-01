@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Menaxhimi_Biblotekes_Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Menaxhimi_Biblotekes_Web.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class AutoriLibriController : Controller
     {
         private readonly BiblotekaDbContext _context;

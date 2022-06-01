@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Menaxhimi_Biblotekes_Web.Models;
 using Menaxhimi_Biblotekes.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Menaxhimi_Biblotekes_Web.Controllers
 {
+    [Authorize]
     public class LibriController : Controller
     {
         private readonly BiblotekaDbContext _context;
@@ -67,6 +69,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(libri);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Libris/Create
         public IActionResult Create()
         {
@@ -89,6 +92,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // POST: Libris/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Autoresia autoresia)
@@ -123,6 +128,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Libris/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -147,6 +153,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(a);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Libris/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -180,8 +187,10 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             }
             return View(autoresia);
         }
-            // GET: Libris/Delete/5
-            public async Task<IActionResult> Delete(int? id)
+
+        [Authorize(Roles = "Admin")]
+        // GET: Libris/Delete/5
+        public async Task<IActionResult> Delete(int? id)
             {
                 if (id == null)
                 {
@@ -198,8 +207,9 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
                 return View(libri);
             }
 
-            // POST: Libris/Delete/5
-            [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
+        // POST: Libris/Delete/5
+        [HttpPost, ActionName("Delete")]
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> DeleteConfirmed(int id)
             {

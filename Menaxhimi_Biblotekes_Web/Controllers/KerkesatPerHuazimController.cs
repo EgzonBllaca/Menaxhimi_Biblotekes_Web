@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Menaxhimi_Biblotekes_Web.Models;
 using Menaxhimi_Biblotekes.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Menaxhimi_Biblotekes_Web.Controllers
 {
@@ -19,6 +20,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: KerkesatPerHuazim
         public async Task<IActionResult> Index(string sortOrder)
         {
@@ -36,6 +38,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(huazimi);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: KerkesatPerHuazim/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -59,6 +62,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // POST: KerkesatPerHuazim/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize (Roles ="Reader")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int id/*[Bind("Id,LibriId,PjesemarresiId,DataKerkeses,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] KerkesatPerHuazim kerkesatPerHuazim*/)
@@ -82,6 +86,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         }
 
         // GET: KerkesatPerHuazim/Edit/5
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -106,6 +112,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
         // POST: KerkesatPerHuazim/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,LibriId,PjesemarresiId,DataKerkeses,IsDeleted,IsActive,CreatedByUserID,CreatedOn,LastUpdatedByUserID,LastUpdatedOn")] KerkesatPerHuazim kerkesatPerHuazim)
@@ -158,6 +166,8 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(kerkesatPerHuazim);
         }
 
+
+        [Authorize(Roles = "Admin")]
         // GET: KerkesatPerHuazim/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -178,6 +188,7 @@ namespace Menaxhimi_Biblotekes_Web.Controllers
             return View(kerkesatPerHuazim);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: KerkesatPerHuazim/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

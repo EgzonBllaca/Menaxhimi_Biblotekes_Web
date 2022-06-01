@@ -1,10 +1,11 @@
 ﻿using Menaxhimi_Biblotekes.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace Menaxhimi_Biblotekes_Web.Models
 {
-    public class BiblotekaDbContext:DbContext
+    public class BiblotekaDbContext:IdentityDbContext
     {
-        public BiblotekaDbContext(DbContextOptions options) :base(options)
+        public BiblotekaDbContext(DbContextOptions<BiblotekaDbContext> options) :base(options)
         {
 
         }

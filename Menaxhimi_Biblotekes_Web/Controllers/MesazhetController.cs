@@ -1,9 +1,11 @@
 ﻿using Menaxhimi_Biblotekes_Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Menaxhimi_Biblotekes_Web.Controllers
 {
+    [Authorize]
     public class MesazhetController : Controller
     {
         private readonly BiblotekaDbContext _context;
